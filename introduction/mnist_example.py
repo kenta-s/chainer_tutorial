@@ -13,19 +13,6 @@ train, test = datasets.get_mnist()
 train_iter = iterators.SerialIterator(train, batch_size=100, shuffle=True)
 test_iter = iterators.SerialIterator(test, batch_size=100, repeat=False, shuffle=False)
 
-class Classifier(Chain):
-    def __init__(self, predictor):
-        super(Classifier, self).__init__()
-        with self.init_scope():
-            self.predictor = predictor
-
-    def __call__(self, x, t):
-        y = self.predictor(x)
-        loss = F.softmax_cross_entropy(y, t)
-        accuracy = F.accuracy(y, t)
-        report({'loss': loss, 'accuracy': accuracy}, self)
-        return loss
-
 class MLP(Chain):
     def __init__(self, n_units, n_out):
         super(MLP, self).__init__()
