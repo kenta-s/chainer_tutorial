@@ -41,7 +41,7 @@ class MLP(Chain):
         y = self.l3(h2)
         return y
 
-model = L.Classifier(MLP(100, 10))  # the input size, 784, is inferred
+model = Classifier(MLP(100, 10))  # the input size, 784, is inferred
 optimizer = optimizers.SGD()
 optimizer.setup(model)
 
